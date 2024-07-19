@@ -15,13 +15,13 @@
         </div>
         <ul class="flex gap-4 text-neutral-600">
             <li>
-                <a href="#">Home</a>
+                <a href="{{ route('home') }}">Home</a>
             </li>
             <li>
-                <a href="#">Login</a>
+                <a href="{{ route('login') }}">Login</a>
             </li>
             <li>
-                <a href="#">Register</a>
+                <a href="{{ route('register') }}">Register</a>
             </li>
         </ul>
     </nav>
