@@ -24,6 +24,9 @@
                 <a href="{{ route('register') }}">Register</a>
             </li>
             <li>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+            </li>
+            <li>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button>Logout</button>
