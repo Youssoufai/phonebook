@@ -23,6 +23,12 @@
             <li>
                 <a href="{{ route('register') }}">Register</a>
             </li>
+            <li>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button>Logout</button>
+                </form>
+            </li>
         </ul>
     </nav>
     {{ $slot }}
