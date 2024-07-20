@@ -25,6 +25,7 @@ class ContactController extends Controller
     public function create()
     {
         //
+        $contacts = Auth::user()->contacts;
         return view('contact.form');
     }
 

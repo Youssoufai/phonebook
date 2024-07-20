@@ -1,8 +1,10 @@
 <x-layout>
     <h1 class="text-3xl text-blue-300 font-bold">Create a new contact</h1>
-    <div>
-        <p> {{ session('success') }} </p>
-    </div>
+    @if (session('success'))
+        <div class="mb-2">
+            <x-flashMsg msg="{{ session('success') }}" />
+        </div>
+    @endif
     <form action="{{ route('contacts.store') }}" method="post">
         @csrf
         <div class="space-x-8 m-4">
