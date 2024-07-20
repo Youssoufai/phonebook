@@ -27,6 +27,9 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li>
+                <a href="{{ route('form') }}">Create Contact</a>
+            </li>
+            <li>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button>Logout</button>

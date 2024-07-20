@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -14,7 +15,7 @@ class ContactController extends Controller
     public function index()
     {
         //
-        $contact = Contact::all();
+        $contact = Contact::latest()->paginate(6);
         return view('contact.dashboard', ['contacts' => $contact]);
     }
 
@@ -24,6 +25,7 @@ class ContactController extends Controller
     public function create()
     {
         //
+        return view('contact.form');
     }
 
     /**
@@ -31,7 +33,18 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        //
+        //validate
+        $fields = $request->validate([
+            'name' => ['required', 'max:300'],
+            'phone' => ['required', 'max_digits:20'],
+            'email' => ['required', 'max:300', 'unique:users']
+        ]);
+
+        // Create a post
+        Auth::user()->contacts()->create($fields);
+
+        // redirect to dashboard
+        return back()->with('success', 'A new contact was created');
     }
 
     /**
