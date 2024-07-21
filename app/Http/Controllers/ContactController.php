@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
@@ -26,13 +27,13 @@ class ContactController extends Controller
     {
         //
         $contacts = Auth::user()->contacts;
-        return view('contact.form');
+        return view('contact.form', ['contacts' => $contacts]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreContactRequest $request)
+    public function store(Request $request)
     {
         //validate
         $fields = $request->validate([
@@ -62,14 +63,26 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         //
+        return view('contact.edit', ['contact' => $contact]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContactRequest $request, Contact $contact)
+    public function update(Request $request, Contact $contact)
     {
         //
+        $fields = $request->validate([
+            'name' => ['required', 'max:300'],
+            'phone' => ['required', 'max_digits:20'],
+            'email' => ['required', 'max:300', 'unique:users']
+        ]);
+
+        // Update a post
+        $contact->update($fields);
+
+        // redirect to dashboard
+        return redirect()->route('dashboard')->with('success', 'A new contact was edited');
     }
 
     /**
@@ -78,5 +91,6 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         //
+        $contact->delete();
     }
 }

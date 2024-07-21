@@ -6,6 +6,7 @@
             <p> {{ $contact->name }} </p>
             <p> {{ $contact->phone }} </p>
             <p> {{ $contact->email }} </p>
+            <a href="{{ route('contacts.edit', $contact) }}">Update</a>
         </div>
     @endforeach
     {{--     <table>
