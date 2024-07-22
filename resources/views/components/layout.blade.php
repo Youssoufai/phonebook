@@ -23,6 +23,21 @@
             <li>
                 <a href="{{ route('register') }}">Register</a>
             </li>
+<<<<<<< HEAD
+            <li>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+            </li>
+            <li>
+                <a href="{{ route('form') }}">Create Contact</a>
+            </li>
+            <li>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button>Logout</button>
+                </form>
+            </li>
+=======
+>>>>>>> origin/main
         </ul>
     </nav>
     {{ $slot }}
