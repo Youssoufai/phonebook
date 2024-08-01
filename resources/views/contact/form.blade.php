@@ -7,7 +7,7 @@
             <x-flashMsg msg="{{ session('success') }}" />
         </div>
     @endif
-    <form action="{{ route('contacts.store') }}" method="post">
+    <form action="{{ route('contacts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="space-x-8 m-4">
             <label for="name">Name</label>
@@ -27,6 +27,14 @@
             <label for="email">Email Address</label>
             <input name="email" type="email" value="{{ old('email') }}" />
             @error('email')
+                <p> {{ $message }} </p>
+            @enderror
+        </div>
+        {{-- Contact Image  --}}
+        <div class="space-x-8 m-4">
+            <label for="image">Contact Image</label>
+            <input name="image" type="file" />
+            @error('image')
                 <p> {{ $message }} </p>
             @enderror
         </div>

@@ -1,13 +1,26 @@
 <x-layout>
     <h1>Update Contact</h1>
     <a href="{{ route('dashboard') }}" class=" underline text-blue-900">Go back to your dashboard</a>
-    <form action="{{ route('contacts.update', $contact) }}" method="post">
+    <form action="{{ route('contacts.update', $contact) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="space-x-8 m-4">
             <label for="name">Name</label>
             <input type="text" name="name" value="{{ $contact->name }}" />
             @error('name')
+                <p> {{ $message }} </p>
+            @enderror
+        </div>
+        @if ($contact->image)
+            <div class="space-x-8 m-4 w-1/4">
+                <label>Current Image</label>
+                <img src="{{ asset('storage/' . $contact->image) }}" alt="">
+            </div>
+        @endif
+        <div class="space-x-8 m-4">
+            <label for="image">Contact Image</label>
+            <input name="image" type="file" />
+            @error('image')
                 <p> {{ $message }} </p>
             @enderror
         </div>

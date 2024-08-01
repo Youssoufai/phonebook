@@ -14,6 +14,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/dashboard', [ContactController::class, 'index'])->name('dashboard');
-Route::get('/form', [DashboardController::class, 'index'])->name('form');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [ContactController::class, 'index'])->name('dashboard');
+    Route::get('/form', [DashboardController::class, 'index'])->name('form');
+});
