@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
@@ -10,6 +11,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller implements HasMiddleware
@@ -26,6 +28,7 @@ class ContactController extends Controller implements HasMiddleware
     public function index()
     {
         //
+        Mail::to('learn@gmail.com')->send(new WelcomeMail());
         $contact = Contact::latest()->paginate(6);
         return view('contact.dashboard', ['contacts' => $contact]);
     }
