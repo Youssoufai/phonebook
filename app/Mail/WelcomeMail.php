@@ -2,10 +2,12 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -17,7 +19,7 @@ class WelcomeMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public User $user)
     {
         //
     }
@@ -29,10 +31,6 @@ class WelcomeMail extends Mailable
     {
         return new Envelope(
             subject: 'Welcome to TheIgorDevelopment Group',
-            from: new Address('TheIgorDevelopment@gmail.com', 'Yusuf'),
-            replyTo: [
-                new Address('learn@gmail.com', 'Learn')
-            ]
 
         );
     }
@@ -54,6 +52,8 @@ class WelcomeMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromStorageDisk('public', 'contact_images/63MmocgIyfv2q4IvxRKBChI1hrfKplkRgLSEPmA9.png')
+        ];
     }
 }

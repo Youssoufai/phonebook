@@ -28,7 +28,7 @@ class ContactController extends Controller implements HasMiddleware
     public function index()
     {
         //
-        Mail::to('learn@gmail.com')->send(new WelcomeMail());
+        Mail::to('learn@gmail.com')->send(new WelcomeMail(Auth::user()));
         $contact = Contact::latest()->paginate(6);
         return view('contact.dashboard', ['contacts' => $contact]);
     }
