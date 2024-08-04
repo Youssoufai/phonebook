@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,10 +29,14 @@ class AuthController extends Controller
         // Login
         Auth::login($user);
 
+        event(new Registered($user));
         // Redirect
         return redirect()->route('home');
     }
-
+    public function verifyEmail()
+    {
+        return view('auth.verify-email');
+    }
     // Login
     public function login(Request $request)
     {

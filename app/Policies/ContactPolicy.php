@@ -10,6 +10,6 @@ class ContactPolicy
 {
     public function modify(User $user, Contact $contact): bool
     {
-        return $user->id === $contact->$user->_id;
+        return $user->id === $contact->user_id;
     }
 }

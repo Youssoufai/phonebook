@@ -18,4 +18,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [ContactController::class, 'index'])->name('dashboard');
     Route::get('/form', [DashboardController::class, 'index'])->name('form');
+    // Email verification
+    Route::get('/email/verify', [AuthController::class, 'verifyEmail'])->name('verification.notice');
 });

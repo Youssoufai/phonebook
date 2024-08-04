@@ -2,8 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -19,7 +21,7 @@ class WelcomeMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct(public User $user, public Contact $contact)
     {
         //
     }
@@ -53,7 +55,7 @@ class WelcomeMail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromStorageDisk('public', 'contact_images/63MmocgIyfv2q4IvxRKBChI1hrfKplkRgLSEPmA9.png')
+            Attachment::fromStorageDisk('public', $this->contact->image)
         ];
     }
 }

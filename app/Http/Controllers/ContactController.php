@@ -28,7 +28,6 @@ class ContactController extends Controller implements HasMiddleware
     public function index()
     {
         //
-        Mail::to('learn@gmail.com')->send(new WelcomeMail(Auth::user()));
         $contact = Contact::latest()->paginate(6);
         return view('contact.dashboard', ['contacts' => $contact]);
     }
@@ -71,12 +70,15 @@ class ContactController extends Controller implements HasMiddleware
         // Create a post
 
 
-        Auth::user()->contacts()->create([
+        $contact = Auth::user()->contacts()->create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
             'image' => $path
         ]);
+
+        // Send Email
+        Mail::to(Auth::user())->send(new WelcomeMail(Auth::user(), $contact));
 
         // redirect to dashboard
         return back()->with('success', 'A new contact was created');
