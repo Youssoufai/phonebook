@@ -2,6 +2,8 @@
     <h1 class="mb-4">Please verify your email through the email we've sent you.</h1>
 
     <p>Didn't get the email?</p>
-
-    <button class="btn px-4 py-2">Send Again</button>
+    <form action="{{ route('verification.send') }}" method="POST">
+        @csrf
+        <button class="btn px-4 py-2">Send Again</button>
+    </form>
 </x-layout>

@@ -22,7 +22,7 @@ class ContactController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('auth', except: ['index', 'show'])
+            new Middleware(['auth', 'verified'], except: ['index', 'show'])
         ];
     }
     public function index()
