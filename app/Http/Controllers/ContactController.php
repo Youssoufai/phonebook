@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserSubscribed;
 use App\Mail\WelcomeMail;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;

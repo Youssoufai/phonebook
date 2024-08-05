@@ -31,6 +31,10 @@
         </div>
         </div>
         <div>
+            <input type="checkbox" name="subscribe" id="subscribe">
+            <label for="subscribe">Subscribe to our newsletter</label>
+        </div>
+        <div>
             <button type="submit" class="px-8 py-2 bg-green-600 text-white rounded-sm">Register</button>
         </div>
     </form>
